@@ -37,7 +37,7 @@
 	</head>
 
 	<body>
-
+<video autoplay style="position: absolute; top: -1000px; left: 0;"></video>
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
@@ -63,6 +63,12 @@
             <li>This presentation was not rehearsed</li>
             <li>This presentation was no content other than photos and animated GIFs</li>
             <li>The presenter for each slide will be chosen randomly</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Spinner</h2>
+          <ul>
+            <img src="images/spinner.jpg" />
           </ul>
         </section>
 				<section>
@@ -366,6 +372,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
+		<script src="js/konami.js"></script>
 
 		<script>
 
@@ -396,6 +403,50 @@
 			});
 
 		</script>
+
+<script>
+  var toggle = 1;
+
+  var onFailSoHard = function(e) {
+    console.log('Reeeejected!', e);
+  };
+
+  var vgaConstraints = {
+    video: {
+      mandatory: {
+        maxWidth: 200,
+        maxHeight: 360,
+        sourceId: "233a37f14facbd8db529b5d9755e7dedbf675bfb957671b6192edef326b87a27"
+      }
+    }
+  };
+
+function toggleIt () {
+  video = document.querySelector('video');
+  if (toggle % 2 == 0) {
+    video.style.top = "-1000px";
+  } else {
+    video.style.top = "0";
+  }
+  toggle++;
+}
+
+function davideo () { navigator.webkitGetUserMedia(vgaConstraints, function(localMediaStream) {
+    video = document.querySelector('video');
+    video.src = window.URL.createObjectURL(localMediaStream);
+  }, onFailSoHard);
+}
+
+window.onkeypress = function(event) {
+  if (event.keyCode == 49) {
+    toggleIt();
+  }
+}
+
+  davideo();
+
+
+</script>
 
 	</body>
 </html>
